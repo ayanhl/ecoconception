@@ -16,10 +16,34 @@
                 question: "Combien d'emails conservez-vous dans votre boîte mail ?",
                 icon: '📧',
                 options: [
-                    { value: 1, label: "Moins de 1000", impact: 5 , info: "Chaque email conservé émet 10g de CO2 par an.", recommendation: "Nettoyez votre boîte mail régulièrement." },
-                    { value: 2, label: "1000-5000", impact: 20 , info: "Les emails inutiles augmentent l'empreinte carbone.", recommendation: "Pensez à archiver ou supprimer les anciens emails." },
-                    { value: 3, label: "5000-10000", impact: 40 , info: "Une boîte mail encombrée équivaut à 100 kg de CO2.", recommendation: "Faites un tri régulier de vos emails." },
-                    { value: 4, label: "Plus de 10000", impact: 60 , info: "Une boîte mail surchargée a un impact important.", recommendation: "Effectuez un grand nettoyage de votre boîte mail." }
+                    {
+                        value: 1,
+                        label: "Moins de 1000",
+                        impact: 5,
+                        info: "Chaque email conservé émet 10g de CO2 par an.",
+                        recommendation: "Nettoyez votre boîte mail régulièrement."
+                    },
+                    {
+                        value: 2,
+                        label: "1000-5000",
+                        impact: 20,
+                        info: "Les emails inutiles augmentent l'empreinte carbone.",
+                        recommendation: "Pensez à archiver ou supprimer les anciens emails."
+                    },
+                    {
+                        value: 3,
+                        label: "5000-10000",
+                        impact: 40,
+                        info: "Une boîte mail encombrée équivaut à 100 kg de CO2.",
+                        recommendation: "Faites un tri régulier de vos emails."
+                    },
+                    {
+                        value: 4,
+                        label: "Plus de 10000",
+                        impact: 60,
+                        info: "Une boîte mail surchargée a un impact important.",
+                        recommendation: "Effectuez un grand nettoyage de votre boîte mail."
+                    }
                 ]
             },
             {
@@ -27,10 +51,34 @@
                 question: "Combien de fichiers stockez-vous sur des services de cloud (Google Drive, Dropbox, etc.) ?",
                 icon: '☁️',
                 options: [
-                    { value: 1, label: "Moins de 100 fichiers", impact: 5 , info: "Chaque fichier stocké consomme de l'énergie pour les serveurs.", recommendation: "Supprimez les fichiers inutiles." },
-                    { value: 2, label: "100-500 fichiers", impact: 20 , info: "Le cloud a un impact énergétique important.", recommendation: "Limitez le stockage en ligne." },
-                    { value: 3, label: "500-1000 fichiers", impact: 50 , info: "Un grand nombre de fichiers augmente votre empreinte carbone.", recommendation: "Stockez localement si possible." },
-                    { value: 4, label: "Plus de 1000 fichiers", impact: 100 , info: "Le stockage massif dans le cloud consomme beaucoup d'énergie.", recommendation: "Réduisez les fichiers non essentiels." }
+                    {
+                        value: 1,
+                        label: "Moins de 100 fichiers",
+                        impact: 5,
+                        info: "Chaque fichier stocké consomme de l'énergie pour les serveurs.",
+                        recommendation: "Vérifiez si certains fichiers sont présents plusieurs fois. Conservez les copies utiles à vos sauvegardes."
+                    },
+                    {
+                        value: 2,
+                        label: "De 100 à 499 fichiers",
+                        impact: 20,
+                        info: "Le cloud a un impact énergétique important.",
+                        recommendation: "Triez vos fichiers par taille et repérez les vidéos volumineuses et les doublons dont vous n’avez plus besoin."
+                    },
+                    {
+                        value: 3,
+                        label: "De 500 à 1 000 fichiers",
+                        impact: 50,
+                        info: "Un grand nombre de fichiers augmente votre empreinte carbone.",
+                        recommendation: "Commencez par un dossier volumineux. Avant de supprimer ses fichiers, vérifiez lesquels sont encore utiles ou sauvegardés ailleurs."
+                    },
+                    {
+                        value: 4,
+                        label: "Plus de 1 000 fichiers",
+                        impact: 100,
+                        info: "Le stockage massif dans le cloud consomme beaucoup d'énergie.",
+                        recommendation: "Consultez l’espace occupé par vos dossiers, puis choisissez un dossier devenu inutile à trier en premier."
+                    }
                 ]
             },
             {
@@ -270,6 +318,27 @@
             document.querySelector('.info-box').classList.remove('visible');
             document.querySelector('.validate-button').style.display = 'block';
             document.querySelector('.next-button').style.display = 'none';
+
+            // Affiche le retour à partir de la deuxième question.
+            document.querySelector('.previous-button').style.display =
+                currentStep > 0 ? 'block' : 'none';
+
+            // Indique que la dernière question mène au bilan.
+            document.querySelector('.next-button').textContent =
+                currentStep === questions.length - 1
+                    ? 'Voir mon bilan'
+                    : 'Question suivante';
+
+            // Restaure la réponse déjà validée pour cette question.
+            const savedValue = userAnswers[question.id];
+            const savedOption = question.options.find(
+                option => option.value === savedValue
+            );
+
+            if (savedOption) {
+                selectOption(savedOption);
+                validateAnswer();
+            }
         }
 
         // Sélectionne une option
@@ -293,8 +362,17 @@
 
         // Gère la réponse sélectionnée
         function handleAnswer(option, button) {
-            selectOption(option); // Met à jour `selectedOption`
-            console.log("Option sélectionnée :", option); // Pour débogage
+            selectOption(option);
+
+            // La nouvelle sélection doit être validée.
+            delete userAnswers[questions[currentStep].id];
+
+            // Masque le conseil associé à la réponse précédente.
+            document.querySelector('.info-box').classList.remove('visible');
+
+            // Demande une nouvelle validation avant de continuer.
+            document.querySelector('.validate-button').style.display = 'block';
+            document.querySelector('.next-button').style.display = 'none';
         }
 
         // Valide la réponse sélectionnée
@@ -308,13 +386,27 @@
             userAnswers[questions[currentStep].id] = selectedOption.value;
 
             // Affiche les informations associées à l'option sélectionnée
-            document.querySelector('.info-text').textContent = `Impact : ${selectedOption.impact} kg CO2`;
-            document.querySelector('.recommendation-text').textContent = `Recommandation : ${selectedOption.recommendation}`;
+            document.querySelector('.answer-text').textContent =
+                `Votre réponse : ${selectedOption.label}`;
+
+            document.querySelector('.info-text').textContent =
+                `Impact : ${selectedOption.impact} kg CO2`;
+
+            document.querySelector('.recommendation-text').textContent =
+                selectedOption.recommendation;
             document.querySelector('.info-box').classList.add('visible');
 
             // Met à jour l'affichage des boutons
             document.querySelector('.validate-button').style.display = 'none';
             document.querySelector('.next-button').style.display = 'block';
+        }
+
+        // Revient à la question précédente.
+        function goToPreviousQuestion() {
+            if (currentStep > 0) {
+                currentStep--;
+                updateQuestion();
+            }
         }
 
         // Passe à la question suivante
@@ -353,12 +445,50 @@
             // Affiche les recommandations
             const recommendationsList = document.getElementById('recommendations-list');
             recommendationsList.innerHTML = '';
+            document.getElementById('action-plan').hidden = true;
+            document.getElementById('action-plan-message').textContent = '';
+            const actionsCount = document.getElementById('actions-count');
+            actionsCount.textContent = 'Aucune action sélectionnée.';
             
             Object.entries(userAnswers).forEach(([questionId, answerValue]) => {
                 const question = questions.find(q => q.id === questionId);
                 const option = question.options.find(opt => opt.value === answerValue);
                 const li = document.createElement('li');
-                li.textContent = option.recommendation;
+
+                // Rappelle le sujet et la réponse du visiteur.
+                const title = document.createElement('strong');
+                title.textContent = question.question;
+
+                const answer = document.createElement('p');
+                answer.textContent = `Votre réponse : ${option.label}`;
+
+                // Permet de choisir cette action pour son plan personnel.
+                const actionLabel = document.createElement('label');
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = option.recommendation;
+                checkbox.addEventListener('change', () => {
+                    document.getElementById('action-plan').hidden = true;
+                    document.getElementById('action-plan-message').textContent = '';
+                    const count = recommendationsList.querySelectorAll(
+                        'input[type="checkbox"]:checked'
+                    ).length;
+
+                    if (count === 0) {
+                        actionsCount.textContent = 'Aucune action sélectionnée.';
+                    } else if (count === 1) {
+                        actionsCount.textContent = '1 action sélectionnée.';
+                    } else {
+                        actionsCount.textContent = `${count} actions sélectionnées.`;
+                    }
+                });
+
+                const actionText = document.createElement('span');
+                actionText.textContent = ` Je veux essayer : ${option.recommendation}`;
+
+                actionLabel.append(checkbox, actionText);
+                li.append(title, answer, actionLabel);
                 recommendationsList.appendChild(li);
             });
         }
@@ -383,7 +513,78 @@
             updateQuestion();
         }
 
+        function showActionPlan() {
+            const selectedActions = document.querySelectorAll(
+                '#recommendations-list input[type="checkbox"]:checked'
+            );
+
+            const plan = document.getElementById('action-plan');
+            const list = document.getElementById('action-plan-list');
+            const message = document.getElementById('action-plan-message');
+
+            list.replaceChildren();
+
+            if (selectedActions.length === 0) {
+                plan.hidden = true;
+                message.textContent =
+                    'Cochez au moins une action pour créer votre plan.';
+                return false;
+            }
+
+            selectedActions.forEach(checkbox => {
+                const item = document.createElement('li');
+                item.textContent = checkbox.value;
+                list.appendChild(item);
+            });
+
+            message.textContent = '';
+            plan.hidden = false;
+
+            document.getElementById('action-plan-title').focus();
+            return true;
+        }
+
+        function clearPrintedActionPlan() {
+            document.body.classList.remove('printing-action-plan');
+            document.getElementById('action-plan-print')?.remove();
+        }
+
+        function printActionPlan() {
+            if (!showActionPlan()) {
+                return;
+            }
+
+            clearPrintedActionPlan();
+
+            // Prépare le contenu destiné à l’impression.
+            const printSection = document.createElement('section');
+            printSection.id = 'action-plan-print';
+
+            const title = document.createElement('h1');
+            title.textContent = 'Mon plan d’action numérique';
+
+            const list = document.getElementById('action-plan-list')
+                .cloneNode(true);
+
+            list.removeAttribute('id');
+
+            printSection.append(title, list);
+            document.body.appendChild(printSection);
+            document.body.classList.add('printing-action-plan');
+
+            window.print();
+        }
+
         // Gestionnaires de boutons
         startQuizButton.addEventListener('click', startQuiz);
         document.querySelector('.validate-button').addEventListener('click', validateAnswer);
         document.querySelector('.next-button').addEventListener('click', goToNextQuestion);
+        document.querySelector('.previous-button')
+            .addEventListener('click', goToPreviousQuestion);
+        document.getElementById('show-plan-button')
+            .addEventListener('click', showActionPlan);
+
+        document.getElementById('print-plan-button')
+            .addEventListener('click', printActionPlan);
+
+        window.addEventListener('afterprint', clearPrintedActionPlan);
