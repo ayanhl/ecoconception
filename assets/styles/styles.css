@@ -29,6 +29,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-padding-top: 90px;
+}
+
 /* Layout styling */
 body {
     font-family: var(--font-main);
@@ -202,6 +206,24 @@ ul {
     font-family:'Segoe UI';
 }
 
+body,
+button,
+input,
+select,
+textarea {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header,
+nav,
+nav ul,
+nav li,
+nav a,
+.back-link,
+.back-text {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 ul {
     padding-left: 20px;
 }
@@ -344,6 +366,25 @@ a {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
+}
+
+/* Variante à 4 cartes : Chiffres, Quiz, Simulateur, Ateliers */
+.home-main-links--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.home-main-links--4 .home-feature-card {
+    justify-content: flex-start;
+}
+
+.home-main-links--4 .home-card-button {
+    margin-top: auto;
+}
+
+@media screen and (max-width: 1280px) {
+    .home-main-links--4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 .home-feature-card {
@@ -971,6 +1012,9 @@ label {
 .app-chatgpt {
     --app-color: #2fdfad;
 }
+.app-claude {
+    --app-color: #d97757;
+}
 .app-facebook {
     --app-color: #1877f2;
 }
@@ -1211,8 +1255,12 @@ footer {
     justify-content: center;
     box-shadow: 0 -2px 4px var(--box-shadow);
     padding: 20px 0;
+    z-index: 10;
 }
 
+html {
+    scroll-padding-bottom: 64px;
+}
 footer p {
     font-size: 0.8rem;
     color: var(--text-color-light);
@@ -1317,6 +1365,9 @@ body:has(img[src*="Steam" i]) {
 }
 body:has(img[src*="ChatGPT" i]) {
     --service-color: #2fdfad;
+}
+body:has(img[src*="Anthropic" i]) {
+    --service-color: #d97757;
 }
 body:has(img[src*="Google" i]) {
     --service-color: #34a853;
@@ -1582,29 +1633,374 @@ sup a {
     min-height: 210px;
 }
 
+/* Les deux cards (CO₂ puis distance en voiture) sont toujours visibles :
+   plus d'effet au survol, l'analogie reste lisible au toucher. */
 .stat-item-container {
-    position: relative;
+    display: contents;
 }
 
-.stat-item-container .stat-item {
+/* Fiches avec la card "distance en voiture" : 4 cards sur la même ligne */
+.stats-icons:has(.stat-item-container) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    align-items: stretch;
+}
+
+.stats-icons:has(.stat-item-container) .stat-item {
+    height: auto;
+    min-height: 0;
+}
+
+@media (max-width: 1100px) {
+    .stats-icons:has(.stat-item-container) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .stats-icons:has(.stat-item-container) {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ANALOGIES DANS LES CARDS DES FICHES
+   Sous chaque chiffre : un petit visuel + une phrase "En clair".
+   Toujours visible (pas de survol). La couleur suit --service-color. */
+.ana {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed color-mix(in srgb, var(--service-color) 45%, transparent);
+    color: var(--service-color);
+    text-align: center;
+}
+
+.ana-viz {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.ana-viz b {
+    font-size: 1rem;
+}
+
+.ana-viz small {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.ana .ana-text {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Cards claires (dégradés) : texte sombre */
+.compare-card {
+    min-width: 0;
+}
+
+.compare-card p {
+    color: #1f2937;
+}
+
+.compare-card .ana {
+    border-top-color: rgba(31, 41, 55, 0.35);
+    color: #1f2937;
+}
+
+.compare-card .ana .ana-text {
+    color: #1f2937;
+}
+
+/* Barre de proportion (ex. 190 pays sur 195) */
+.ana-bar {
+    width: 100%;
+    height: 12px;
+    border-radius: 999px;
+    background: rgba(232, 232, 232, 0.14);
+    overflow: hidden;
+}
+
+.ana-bar span {
+    display: block;
+    width: var(--v);
+    height: 100%;
+    border-radius: 999px;
+    background: var(--service-color);
+}
+
+/* Règle graduée (ex. 20 cm) */
+.ana-ruler {
+    width: 100%;
+    height: 24px;
+    border: 2px solid currentColor;
+    border-radius: 3px;
+    background: repeating-linear-gradient(90deg, currentColor 0 1.5px, transparent 1.5px 10%) bottom / 100% 50% no-repeat;
+}
+
+/* Mesure sous une rangée d'objets (ex. 10 m) */
+.ana-measure {
+    position: relative;
+    width: 100%;
+    height: 14px;
+    border-bottom: 2px solid currentColor;
+}
+
+.ana-measure::before,
+.ana-measure::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    width: 2px;
+    height: 12px;
+    background: currentColor;
+}
+
+.ana-measure::before {
+    left: 0;
+}
+
+.ana-measure::after {
+    right: 0;
+}
+
+.ana-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
     width: 100%;
 }
 
-.stat-item-container #stat-item-hover {
+/* Terrains de foot miniatures (1 terrain = 105 m) */
+.ana-pitches {
+    display: grid;
+    grid-template-columns: repeat(var(--n, 5), 1fr);
+    gap: 6px;
+    width: 100%;
+}
+
+.ana-pitches i {
+    position: relative;
+    aspect-ratio: 105 / 68;
+    border: 1.5px solid currentColor;
+    border-radius: 2px;
+    overflow: hidden;
+    background: linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+}
+
+.ana-pitches i::before {
+    content: "";
     position: absolute;
-    inset: 0;
-    opacity: 0;
-    visibility: hidden;
+    inset: 0 auto 0 0;
+    width: var(--fill, 100%);
+    background: currentColor;
+    opacity: 0.28;
 }
 
-.stat-item-container:hover #stat-item-base {
-    opacity: 0;
-    visibility: hidden;
+/* Ampoules allumées / éteintes */
+.ana-off {
+    opacity: 0.3;
+    filter: grayscale(1);
 }
 
-.stat-item-container:hover #stat-item-hover {
-    opacity: 1;
-    visibility: visible;
+/* Verre plein */
+.ana-glass {
+    width: 36px;
+    height: 46px;
+    border: 3px solid currentColor;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    background: color-mix(in srgb, currentColor 45%, transparent);
+}
+
+.ana-viz svg {
+    width: 86px;
+    height: auto;
+}
+
+.ana-viz svg.ana-earth {
+    width: 76px;
+}
+
+.ana-viz svg.ana-icon {
+    width: 26px;
+}
+
+.ana-viz svg.ana-car {
+    width: 56px;
+}
+
+.ana-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Blocs d'unité : la dernière peut être partielle (ex. 2,6 terrains) */
+.ana-units {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+}
+
+.ana-units i {
+    width: calc(var(--uw, 30px) * var(--u, 1));
+    height: 18px;
+    border-radius: 4px;
+    background: currentColor;
+    opacity: 0.8;
+}
+
+.ana-units i.part {
+    opacity: 0.45;
+}
+
+.ana-cells i.more {
+    background: currentColor;
+    opacity: 0.45;
+}
+
+/* Phrase d'analogie sous une barre de comparaison */
+.comparison-item .ana-line {
+    margin: 8px 0 0;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.ana-bar + small {
+    display: block;
+    margin: 3px 0 6px;
+    font-size: 0.78rem;
+    font-weight: bold;
+}
+
+/* Cases (ex. 1 sur 4, 3 sur 10) */
+.ana-cells {
+    display: grid;
+    grid-template-columns: repeat(var(--c, 4), 1fr);
+    gap: 4px;
+    width: 100%;
+}
+
+.ana-cells i {
+    height: var(--h, 16px);
+    border-radius: 3px;
+    background: rgba(232, 232, 232, 0.14);
+}
+
+.ana-cells i.on {
+    background: currentColor;
+}
+
+/* Terrain / court rempli en proportion */
+.ana-court {
+    position: relative;
+    width: 100%;
+    max-height: 110px;
+    aspect-ratio: var(--ar, 2);
+    border: 2px solid currentColor;
+    border-radius: 4px;
+    overflow: hidden;
+    background: linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+}
+
+.ana-court::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--fill);
+    background: currentColor;
+    opacity: 0.3;
+}
+
+/* Batterie de smartphone */
+.ana-battery {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 78%;
+    max-width: 200px;
+    height: 40px;
+    border: 3px solid currentColor;
+    border-radius: 9px;
+}
+
+.ana-battery::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--level);
+    border-radius: 5px 0 0 5px;
+    background: currentColor;
+    opacity: 0.45;
+}
+
+.ana-battery::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    right: -10px;
+    width: 5px;
+    height: 14px;
+    border-radius: 0 3px 3px 0;
+    background: currentColor;
+}
+
+.ana-battery b {
+    position: relative;
+}
+
+/* Bouteilles d'eau de 1,5 L */
+.ana-bottles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+}
+
+.ana-bottle {
+    position: relative;
+    width: 16px;
+    height: 38px;
+    border: 2px solid currentColor;
+    border-radius: 6px 6px 4px 4px;
+    overflow: hidden;
+}
+
+.ana-bottle::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: var(--fill, 100%);
+    background: currentColor;
+    opacity: 0.45;
+}
+
+.ana-bottle::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 6px;
+    height: 5px;
+    background: currentColor;
+    transform: translateX(-50%);
 }
 
 /* En Pratique - Écoconception Numérique */
@@ -1952,6 +2348,67 @@ pre code {
     opacity: .9;
 }
 
+/* Sommaire (page responsable_impact_numerique) */
+.toc {
+    width: 100%;
+}
+.toc ol {
+    list-style: none;
+    counter-reset: toc;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: .6rem 1.2rem;
+    text-align: left;
+}
+.toc li {
+    counter-increment: toc;
+}
+.toc a {
+    display: flex;
+    align-items: baseline;
+    gap: .7rem;
+    height: 100%;
+    padding: .6rem .9rem;
+    border: 1px solid rgba(47, 223, 173, .2);
+    border-radius: 10px;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    text-decoration: none;
+    transition: background-color .2s ease;
+}
+.toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    opacity: .7;
+}
+.toc a:hover,
+.toc a:focus-visible {
+    background-color: rgba(47, 223, 173, .08);
+}
+
+/* Tableau récapitulatif (page responsable_impact_numerique) */
+.recap-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: .95rem;
+    line-height: 1.5;
+}
+.recap-table caption {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: .5rem;
+}
+.recap-table th,
+.recap-table td {
+    border: 1px solid rgba(47, 223, 173, .35);
+    padding: .5rem .6rem;
+    text-align: left;
+    vertical-align: top;
+}
+.recap-table th {
+    color: var(--highlight-color);
+}
+
 /* Responsive Design */
 
 /* Tablettes (Portrait et Paysage) */
@@ -2060,6 +2517,7 @@ pre code {
         display: block;
         text-align: center;
         border-bottom: 1px solid rgba(47, 223, 173, 0.1);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
     nav a::after {
@@ -2777,5 +3235,419 @@ pre code {
 
     .language-why {
         padding: 20px 16px;
+    }
+}
+
+/* COMPTEUR D'EMPREINTE ECOINDEX */
+
+/* Texte invisible à l'écran mais lu par les lecteurs d'écran (accessibilité) */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+/* Badge */
+.eco-badge {
+    --eco-surface: #242426;
+    --eco-bord: #6e6e73;
+    --eco-texte-2: #b0b0b0;
+    --eco-ease: cubic-bezier(0.23, 1, 0.32, 1);
+    margin-left: 12px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--text-color-light);
+    font-variant-numeric: tabular-nums;
+}
+
+.eco-badge > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 24px;
+    padding: 2px 10px 2px 6px;
+    border: 1px solid var(--eco-bord);
+    border-radius: 12px;
+    cursor: pointer;
+    list-style: none;
+    transition: border-color 150ms ease, transform 160ms var(--eco-ease);
+}
+
+.eco-badge > summary::-webkit-details-marker {
+    display: none;
+}
+
+.eco-badge[open] > summary {
+    border-color: var(--highlight-color);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .eco-badge > summary:hover {
+        border-color: var(--highlight-color);
+    }
+}
+
+.eco-badge > summary:active {
+    transform: scale(0.97);
+}
+
+.eco-badge > summary:focus-visible {
+    outline: 2px solid var(--highlight-color);
+    outline-offset: 3px;
+}
+
+.eco-badge__fleche {
+    flex: none;
+    width: 16px;
+    height: 11px;
+    background: var(--eco-note);
+    clip-path: polygon(0 0, 62% 0, 100% 50%, 62% 100%, 0 100%);
+}
+
+.eco-badge__chevron {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    margin-left: 2px;
+    border-top: 1.5px solid currentColor;
+    border-left: 1.5px solid currentColor;
+    transform: translateY(2px) rotate(45deg);
+    transition: transform 160ms var(--eco-ease);
+}
+
+.eco-badge[open] .eco-badge__chevron {
+    transform: translateY(-2px) rotate(225deg);
+}
+
+.eco-badge strong {
+    color: inherit;
+}
+
+/* Panneau */
+.eco-badge__panel {
+    position: absolute;
+    inset: auto 16px 100% auto;
+    width: min(22rem, calc(100vw - 32px));
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    margin-bottom: 8px;
+    padding: 16px;
+    border: 1px solid var(--eco-bord);
+    border-radius: 12px;
+    background-color: var(--eco-surface);
+    color: var(--text-color);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-align: left;
+    transform-origin: bottom right;
+    transition: opacity 160ms var(--eco-ease), transform 160ms var(--eco-ease);
+}
+
+@starting-style {
+    .eco-badge__panel {
+        opacity: 0;
+        transform: translateY(4px) scale(0.98);
+    }
+}
+
+.eco-badge__panel p,
+.eco-badge__panel ol,
+.eco-badge__panel ul {
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    text-align: left;
+}
+
+.eco-badge__panel p:last-child {
+    margin-bottom: 0;
+}
+
+.eco-badge__panel li {
+    margin: 0;
+}
+
+.eco-badge__panel a {
+    color: var(--highlight-color);
+    text-underline-offset: 3px;
+}
+
+.eco-badge__panel a:focus-visible {
+    outline: 2px solid var(--highlight-color);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.eco-badge__panel ::selection {
+    background: rgba(47, 223, 173, 0.35);
+    color: var(--text-color);
+}
+
+.eco-badge__panel .eco-badge__titre {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.eco-badge__panel .eco-badge__sous-titre {
+    margin: 16px 0 8px;
+    font-weight: bold;
+}
+
+/* Textes secondaires */
+.eco-badge__panel .eco-badge__discret,
+.eco-badge__sous-titre span,
+.eco-impact span,
+.eco-jauge__bornes,
+.eco-mesure__libelle,
+.eco-mesure__objectif,
+.eco-lourds__poids {
+    color: var(--eco-texte-2);
+}
+
+.eco-badge__panel .eco-badge__discret,
+.eco-badge__sous-titre span,
+.eco-impact span {
+    font-size: 0.8rem;
+}
+
+.eco-badge__sous-titre span {
+    font-weight: normal;
+}
+
+/* Réglette de G à A */
+.eco-jauge {
+    margin: 0 0 16px;
+}
+
+.eco-jauge__piste {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-top: 28px;
+}
+
+.eco-jauge__zone {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    background: var(--eco-note);
+    color: #1c1c1e;
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1;
+    /* séparation entre cases, sans occuper de place */
+    box-shadow: inset 2px 0 0 var(--eco-surface);
+}
+
+.eco-jauge__repere + .eco-jauge__zone {
+    border-radius: 4px 0 0 4px;
+    box-shadow: none;
+}
+
+.eco-jauge__zone:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+/* Case de la note */
+.eco-jauge__piste .eco-jauge__zone--ici {
+    position: relative;
+    z-index: 1;
+    min-height: 36px;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 2px var(--text-color), inset 0 0 0 4px #1c1c1e;
+}
+
+/* Pointe sous l'étiquette du score */
+.eco-jauge__piste::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: 20px auto auto calc(var(--eco-position) * 1%);
+    width: 12px;
+    height: 6px;
+    margin-left: -6px;
+    background: var(--text-color);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.eco-jauge__repere {
+    position: absolute;
+    inset: 0 auto auto clamp(2rem, calc(var(--eco-position) * 1%), calc(100% - 2rem));
+    transform: translateX(-50%);
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--text-color);
+    color: #1c1c1e;
+    font-size: 0.8rem;
+    font-weight: bold;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+.eco-jauge__bornes {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 0.75rem;
+}
+
+/* CO2e et eau par visite */
+.eco-impact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 0 16px;
+    border: 1px solid #3a3a3c;
+    border-radius: 8px;
+}
+
+.eco-badge__panel .eco-impact p {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 8px 12px;
+}
+
+.eco-badge__panel .eco-impact p + p {
+    border-left: 1px solid #3a3a3c;
+}
+
+.eco-impact strong {
+    font-size: 1rem;
+    line-height: 1.3;
+}
+
+/* Mesures et fichiers les plus lourds */
+.eco-mesures {
+    display: grid;
+    gap: 10px;
+}
+
+.eco-lourds {
+    display: grid;
+    gap: 8px;
+}
+
+.eco-mesure,
+.eco-lourds li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+}
+
+.eco-lourds__nom {
+    overflow-wrap: anywhere;
+}
+
+.eco-mesure__jauge,
+.eco-lourds__jauge {
+    grid-column: 1 / -1;
+    background: #3a3a3c;
+}
+
+.eco-mesure__jauge > span,
+.eco-lourds__jauge > span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+}
+
+/* Jauge des mesures */
+.eco-mesure__jauge {
+    position: relative;
+    height: 6px;
+    border-radius: 3px;
+}
+
+.eco-mesure__jauge::after {
+    content: "";
+    position: absolute;
+    inset: -3px auto -3px 50%;
+    width: 2px;
+    background: var(--eco-texte-2);
+}
+
+.eco-mesure__jauge > span {
+    background: var(--highlight-color);
+}
+
+.eco-mesure--depasse .eco-mesure__jauge > span {
+    background: #F99839;
+}
+
+/* Jauge des fichiers */
+.eco-lourds__jauge {
+    height: 4px;
+    border-radius: 2px;
+}
+
+.eco-lourds__jauge > span {
+    background: var(--light-color);
+}
+
+@media (forced-colors: active) {
+    .eco-badge__fleche,
+    .eco-jauge__piste,
+    .eco-mesure__jauge,
+    .eco-lourds__jauge {
+        forced-color-adjust: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .eco-badge > summary,
+    .eco-badge__chevron {
+        transition: none;
+    }
+
+    .eco-badge > summary:active {
+        transform: none;
+    }
+
+    .eco-badge__panel {
+        transition: opacity 120ms ease;
+    }
+}
+
+/* Mobile : badge sous le texte du footer, panneau dans le flux de la page */
+@media screen and (max-width: 768px) {
+    footer {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .eco-badge {
+        margin-left: 0;
+        font-size: 0.72rem;
+    }
+
+    .eco-badge__panel {
+        position: static;
+        width: 100%;
+        max-height: none;
+        margin: 8px 0 0;
+        transform-origin: top center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .eco-badge__ges {
+        display: none;
+    }
+}
+
+@media print {
+    .eco-badge {
+        display: none;
     }
 }

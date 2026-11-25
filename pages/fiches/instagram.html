@@ -35,12 +35,13 @@
 <nav id="navbar">
             <ul>
                 <li class="mg-0"><a href="../../index.html">Home</a></li>
-                <li class="mg-0"><a href="../quelques-chiffres.html" class="active">Chiffres</a></li>
                 <li class="mg-0"><a href="../quizz-access.html">Quiz</a></li>
-                <li class="mg-0"><a href="../en-pratique.html">Ateliers</a></li>
+                <li class="mg-0"><a href="../quelques-chiffres.html" class="active">Chiffres</a></li>
                 <li class="mg-0"><a href="../outils.html">Outils</a></li>
                 <li class="mg-0"><a href="../langages.html">Langages</a></li>
+                <li class="mg-0"><a href="../en-pratique.html">Ateliers</a></li>
                 <li class="mg-0"><a href="../ressources.html">Ressources</a></li>
+                <li class="mg-0"><a href="../debat.html">Débat</a></li>
                 <li class="mg-0"><a href="../terminologie.html">Terminologie</a></li>
             </ul>
         </nav>
@@ -56,22 +57,26 @@
                     <i class="fas fa-users"></i>
                     <h2>2+ Milliards</h2>
                     <p>Utilisateurs actifs mensuels <sup><a href="#source1">[1]</a></sup></p>
+<div class="ana"><p class="ana-text">Autrement dit, environ 1 personne sur 4 dans le monde l’utilise.<sup><a href="#source4">[4]</a></sup></p></div>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-photo-video"></i>
                     <h2>95+ Millions</h2>
                     <p>Photos et vidéos publiées chaque jour <sup><a href="#source1">[1]</a></sup></p>
+<div class="ana"><p class="ana-text">Cela fait près de 1 100 publications chaque seconde.</p></div>
                 </div>
                 <div class="stat-item-container">
                     <div class="stat-item" id="stat-item-base">
                         <i class="fas fa-leaf"></i>
                         <h2>52g CO2</h2>
                         <p>Émission de CO2 par heure d'utilisation<sup><a href="#source2">[2]</a></sup></p>
+<div class="ana"><p class="ana-text">C’est à peu près le poids d’un œuf.</p></div>
                     </div>
                     <div class="stat-item" id="stat-item-hover">
                         <i class="fa-solid fa-car"></i>
                         <h2>260 m</h2>
                         <p>Équivalent carbone (distance en voiture) selon impact CO2<sup><a href="#source2">[2]</a></sup></p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-stack"><div class="ana-pitches" style="--n: 3"><i></i><i></i><i style="--fill: 48%"></i></div><small>1 terrain de foot = 105 m</small></div></div><p class="ana-text">C’est la distance qu’une voiture parcourt en émettant autant de CO₂ : 260 m, soit près de 2 terrains et demi de foot.<sup><a href="#source6">[6]</a></sup></p></div>
                     </div>
                 </div>
             </section>
@@ -82,6 +87,7 @@
                 <div class="chart-container" style="display: flex; justify-content: center; max-width: 100%; position: relative; height: 400px;">
                     <canvas id="co2Chart"></canvas>
                 </div>
+<div class="ana"><p class="ana-text">Il faudrait environ 3 heures d’Instagram pour émettre autant de CO₂ qu’un trajet de 1 km en voiture, et près de 58 heures pour égaler 100 g de bœuf.</p></div>
             </section>
             <section class="additional-impact">
                 <h2>Autres impacts environnementaux <sup><a href="#source3">[3]</a></sup></h2>
@@ -89,14 +95,17 @@
                     <div class="impact-card impact-card-1">
                         <p class="impact-value">0,12 Litres /min</p>
                         <p class="impact-label">Ressource en Eau</p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-stack"><div class="ana-bottles"><span class="ana-bottle"></span><span class="ana-bottle"></span><span class="ana-bottle"></span><span class="ana-bottle"></span><span class="ana-bottle" style="--fill: 80%"></span></div><small>1 bouteille = 1,5 L</small></div></div><p class="ana-text">Cela fait 7,2 L par heure, environ 5 bouteilles d’eau de 1,5 L.</p></div>
                     </div>
                     <div class="impact-card impact-card-2">
                         <p class="impact-value">1,03 m² /min</p>
                         <p class="impact-label">Occupation des sols</p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-stack"><div class="ana-court" style="--fill: 24%; --ar: 2.17"></div><small>Court de tennis : 261 m²</small></div></div><p class="ana-text">En une heure, cela représente environ 62 m² de sols, près d’un quart d’un court de tennis.<sup><a href="#source5">[5]</a></sup></p></div>
                     </div>
                     <div class="impact-card impact-card-3">
                         <p class="impact-value">8,9 mAh /min</p>
                         <p class="impact-label">Consommation d'énergie</p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-battery" style="--level: 13%"><b>13 %</b></div></div><p class="ana-text">En une heure, cela représente environ 13 % de la batterie d’un smartphone de 4 000 mAh.</p></div>
                     </div>
                 </section>
 
@@ -160,6 +169,10 @@
                 <li id="source1">[1] "Chiffres Instagram - 2025," Blog du modérateur. Disponible en ligne : <a href="https://www.blogdumoderateur.com/chiffres-instagram/" target="_blank">https://www.blogdumoderateur.com/</a></li>
                 <li id="source2">[2] "Quelle empreinte environnementale pour les applications réseaux sociaux ? Édition 2023 ," Greenspector. Disponible en ligne : <a href="https://greenspector.com/fr/quelle-empreinte-environnementale-pour-les-applications-reseaux-sociaux-edition-2023/" target="_blank">https://greenspector.com/</a></li>
                 <li id="source3">[3] "Quelle empreinte environnementale pour les applications réseaux sociaux ? Édition 2021," Greenspector, Disponible en ligne : <a href="https://greenspector.com/fr/reseaux-sociaux-2021/" target="_blank">https://greenspector.com/</a></li>
+<li id="source4">[4] "World Population Prospects 2024," Nations unies, Division de la population (environ 8,3 milliards d'habitants), Disponible en ligne : <a href="https://population.un.org/wpp/" target="_blank">https://population.un.org/</a></li>
+<li id="source5">[5] "Règles du tennis 2026," Fédération internationale de tennis (court de 23,77 m × 10,97 m, soit environ 261 m²), Disponible en ligne : <a href="https://www.itftennis.com/media/7222/2026-rules-of-tennis-french.pdf" target="_blank">https://www.itftennis.com/</a></li>
+<li id="source6">[6] "Football Stadiums Guidelines – Pitch dimensions," FIFA (terrain recommandé : 105 m × 68 m), Disponible en ligne : <a href="https://publications.fifa.com/de/football-stadiums-guidelines/technical-guideline/stadium-guidelines/pitch-dimensions-and-surrounding-areas" target="_blank">https://publications.fifa.com/</a></li>
+<li class="bibliography-note">Les équivalences du quotidien sont des ordres de grandeur calculés à partir des chiffres de cette fiche. Hypothèses retenues selon les cards : voiture à 5 m par gramme de CO2 (ou 150 g de CO2 par km lorsque la fiche donne ce ratio), batterie de smartphone de 4 000 mAh, objets usuels de masse moyenne.</li>
             </ul>
         </section>
         <div class="button-container">
@@ -256,10 +269,6 @@
         input.addEventListener("input", update);
         update();
     </script>
-   <footer>
-    <section class="footer-content">
-        <p>&copy; 2024 - Impact Environnemental de Instagram | Conçu par XITRA Lucas, étudiant de Master informatique, UR</p>
-    </section>
-    </footer>
+   
 </body>
 </html>

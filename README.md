@@ -25,6 +25,7 @@ Ce site a été développé dans le cadre de mon stage de recherche en éco-conc
   - **TP 02** : Optimisation des Ressources Web
   - **TP 03** : Détection et Réduction des Scripts Inutilisés
   - **TP 04** : Optimisation de l'Utilisation des Polices Web
+  - **Atelier interactif IA** : Génération d'images par IA et écoconception (`pages/en-pratique/atelier-ia-images.html`). Les données de l'atelier sont dans `assets/scripts/atelierIaImagesData.js`. Les images comparées et les mesures de temps et d'énergie proviennent de vraies générations (AMD Radeon RX 9070 XT, ComfyUI), reproductibles avec les scripts de `outils/mesure-ia/` (protocole dans son README).
 - **Outils** : Présentation des outils recommandés pour l'analyse et l'optimisation écologique des services numériques.
 
 ## Technologies utilisées

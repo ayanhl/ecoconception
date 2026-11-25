@@ -34,12 +34,13 @@
 <nav id="navbar">
             <ul>
                 <li class="mg-0"><a href="../../index.html">Home</a></li>
-                <li class="mg-0"><a href="../quelques-chiffres.html" class="active">Chiffres</a></li>
                 <li class="mg-0"><a href="../quizz-access.html">Quiz</a></li>
-                <li class="mg-0"><a href="../en-pratique.html">Ateliers</a></li>
+                <li class="mg-0"><a href="../quelques-chiffres.html" class="active">Chiffres</a></li>
                 <li class="mg-0"><a href="../outils.html">Outils</a></li>
                 <li class="mg-0"><a href="../langages.html">Langages</a></li>
+                <li class="mg-0"><a href="../en-pratique.html">Ateliers</a></li>
                 <li class="mg-0"><a href="../ressources.html">Ressources</a></li>
+                <li class="mg-0"><a href="../debat.html">Débat</a></li>
                 <li class="mg-0"><a href="../terminologie.html">Terminologie</a></li>
             </ul>
         </nav>
@@ -54,17 +55,20 @@
                 <div class="stat-item">
                     <i class="fas fa-users"></i>
                     <h2>10+ Millions</h2>
-                    <p>Nombre de requêtes quotidiennes <sup><a href="#source1">[1]</a></sup></sup></p>
+                    <p>Nombre de requêtes quotidiennes <sup><a href="#source1">[1]</a></sup></p>
+<div class="ana"><p class="ana-text">Cela fait environ 115 questions posées chaque seconde, jour et nuit.</p></div>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-globe"></i>
                     <h2>161 Pays</h2>
                     <p>Présence mondiale de ChatGPT <sup><a href="#source2">[2]</a></sup></p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-stack"><div class="ana-bar" style="--v: 82.6%"><span></span></div><small>161 pays sur 195</small></div></div><p class="ana-text">ChatGPT est disponible dans plus de 4 pays sur 5.</p></div>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-broadcast-tower"></i>
                     <h2>1.54 g CO2</h2>
                     <p>Émissions de CO2 par requête <sup><a href="#source1">[1]</a></sup></p>
+<div class="ana"><p class="ana-text">C’est à peu près la masse d’un trombone et demi, ou 10 m parcourus en voiture.</p></div>
                 </div>
             </section>
             <section class="impact-details">
@@ -74,6 +78,7 @@
                 <div class="chart-container" style="display: flex; justify-content: center; max-width: 100%; position: relative; height: 400px;">
                     <canvas id="co2Chart"></canvas>
                 </div>
+<div class="ana"><p class="ana-text">Il faudrait poser environ 100 questions à ChatGPT pour émettre autant de CO₂ qu’un trajet de 1 km en voiture, et près de 1 950 pour égaler 100 g de bœuf.</p></div>
             </section>   
             <section class="additional-impact">
                 <h2>Impacts supplémentaires <sup><a href="#source1">[1]</a></sup><sup><a href="#source3">[3]</a></sup></h2>
@@ -81,14 +86,17 @@
                     <div class="impact-card impact-card-1">
                         <p class="impact-value">20-30% Empreinte carbone</p>
                         <p class="impact-label">Fabrication des serveurs</p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-cells" style="--c: 10; --h: 18px"><i class="on"></i><i class="on"></i><i class="more"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><p class="ana-text">Sur 10 kg de CO₂ émis, 2 à 3 viennent de la fabrication des serveurs, avant même la première question.</p></div>
                     </div>
                     <div class="impact-card impact-card-2">
                         <p class="impact-value">5,4M Litres</p>
                         <p class="impact-label">Ressources en eau pour l'entraînement de GPT-3</p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-stack"><div class="ana-units" style="--uw: 44px"><i></i><i></i><i class="part" style="--u: 0.16"></i></div><small>1 piscine olympique = 2,5 millions de litres</small></div></div><p class="ana-text">De quoi remplir un peu plus de 2 piscines olympiques.<sup><a href="#source4">[4]</a></sup></p></div>
                     </div>
                     <div class="impact-card impact-card-3">
                         <p class="impact-value">502 Tonnes</p>
                         <p class="impact-label">CO2 pour l'entraînement de GPT-3</p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><svg class="ana-earth" viewBox="0 0 92 92" role="presentation"><circle cx="46" cy="46" r="14" fill="currentColor" fill-opacity="0.3" stroke="currentColor" stroke-width="2"></circle><circle cx="46" cy="46" r="23" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 4"></circle><circle cx="46" cy="46" r="31" fill="none" stroke="currentColor" stroke-opacity="0.7" stroke-width="1.5" stroke-dasharray="3 4"></circle><circle cx="46" cy="46" r="39" fill="none" stroke="currentColor" stroke-opacity="0.45" stroke-width="1.5" stroke-dasharray="3 4"></circle><circle cx="69" cy="46" r="3" fill="currentColor"></circle><circle cx="25" cy="28" r="3" fill="currentColor" fill-opacity="0.7"></circle><circle cx="46" cy="85" r="3" fill="currentColor" fill-opacity="0.45"></circle></svg><b>≈ 84 tours</b></div><p class="ana-text">Avec ce CO₂, une voiture ferait environ 84 fois le tour de la Terre.</p></div>
                     </div>
                 </section>
                 <section class="additional-impact-content"> 
@@ -134,6 +142,8 @@
                 <li id="source1">[1] "Quelle est l'empreinte carbone de ChatGPT ?," Blog d'Ekip, Disponible en ligne : <a href="https://blog.ekip.app/quelle-est-lempreinte-carbone-de-chatgpt/" target="_blank">https://blog.ekip.app/</a></li>
                 <li id="source2">[2] "Statistiques ChatGPT : Tout savoir sur les chiffres clés," Tool Advisor, Disponible en ligne : <a href="https://tool-advisor.fr/blog/statistiques-chatgpt/#:~:text=ChatGPT%20est%20disponible%20dans%20161%20pays&text=Selon%20OpenAI%2C%20ChatGPT%20est%20accessible,pays%20ayant%20interdit%20la%20technologie." target="_blank">https://tool-advisor.fr/</a></li>
                 <li id="source3">[3] Benoit Raphaël, "Le vrai coût environnemental de ChatGPT" <a href="https://www.2050now.com/p/le-vrai-cou-t-environnemental-de-chatgpt" target="_blank">https://www.2050now.com/</a></li>
+<li id="source4">[4] "Règlement World Aquatics 2025," Fédération française de natation (bassin olympique : 50 m de long, soit environ 2,5 millions de litres), Disponible en ligne : <a href="https://www.ffnatation.fr/sites/default/files/2025-05/FFN_R%C3%A9glement%20WA%202025_0.pdf" target="_blank">https://www.ffnatation.fr/</a></li>
+<li class="bibliography-note">Les équivalences du quotidien sont des ordres de grandeur calculés à partir des chiffres de cette fiche. Hypothèses retenues selon les cards : voiture à 5 m par gramme de CO2 (ou 150 g de CO2 par km lorsque la fiche donne ce ratio), batterie de smartphone de 4 000 mAh, objets usuels de masse moyenne.</li>
             </ul>
         </section>
         <div class="button-container">

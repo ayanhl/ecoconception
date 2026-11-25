@@ -87,7 +87,7 @@ const questions = [
             "L'empreinte écologique est plus précise que l'empreinte carbone.",
             "Les deux termes sont interchangeables.",
         ],
-        correctAnswer: 1
+        correctAnswer: 2
     },
     {
         question: "Quel outil permet de mesurer l'empreinte carbone d'un site web ?",

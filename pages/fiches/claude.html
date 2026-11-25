@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Impact environnemental de l'assistant Claude">
+    <meta name="keywords" content="écoconception, Claude, Anthropic, empreinte carbone, intelligence artificielle, environnement">
+    <meta name="author" content="Master 2 informatique">
+    <meta name="expires" content="Thu, 31 Dec 2027 23:59:59 GMT">
+    <title>Claude - Écoconception Numérique</title>
+    <link rel="icon" href="../../assets/img/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/styles/styles.css">
+    <link rel="stylesheet" href="../../assets/styles/print.css" media="print">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="../../assets/scripts/hamburger.js"></script>
+</head>
+
+<body>
+    <header>
+        <a href="../quelques-chiffres.html" class="back-link">
+            <span class="back-arrow">🠔</span>
+            <span class="back-text">Retour</span>
+        </a>
+
+        <button class="hamburger" id="hamburger-menu" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="navbar">
+            <ul>
+                <li class="mg-0"><a href="../../index.html">Home</a></li>
+                <li class="mg-0"><a href="../quizz-access.html">Quiz</a></li>
+                <li class="mg-0"><a href="../quelques-chiffres.html" class="active">Chiffres</a></li>
+                <li class="mg-0"><a href="../outils.html">Outils</a></li>
+                <li class="mg-0"><a href="../langages.html">Langages</a></li>
+                <li class="mg-0"><a href="../en-pratique.html">Ateliers</a></li>
+                <li class="mg-0"><a href="../ressources.html">Ressources</a></li>
+                <li class="mg-0"><a href="../debat.html">Débat</a></li>
+                <li class="mg-0"><a href="../terminologie.html">Terminologie</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main">
+        <h1>Impact environnemental de Claude</h1>
+        <section class="services-container">
+            <section class="intro-text">
+                <p>
+                    Claude est un assistant conversationnel développé par Anthropic. Il peut répondre,
+                    rédiger, analyser des documents, produire du code et utiliser des outils. Comme tout
+                    service d'intelligence artificielle générative, son impact dépend de l'entraînement
+                    des modèles, du fonctionnement des centres de données, du transfert des données et
+                    de l'énergie nécessaire à chaque réponse.
+                    <sup><a href="#source1">[1]</a></sup>
+                </p>
+            </section>
+
+            <section class="stats-icons">
+                <div class="stat-item">
+                    <i class="fas fa-globe"></i>
+                    <h2>159 Pays</h2>
+                    <p>Disponibilité annoncée pour Claude lors du lancement de la famille Claude 3 <sup><a href="#source2">[2]</a></sup></p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-stack"><div class="ana-bar" style="--v: 81.5%"><span></span></div><small>159 pays sur 195</small></div></div><p class="ana-text">Claude est disponible dans plus de 4 pays sur 5.</p></div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-layer-group"></i>
+                    <h2>3 modèles</h2>
+                    <p>Haiku, Sonnet et Opus à la sortie de la famille Claude 3 <sup><a href="#source2">[2]</a></sup></p>
+<div class="ana"><p class="ana-text">C’est comme avoir un petit, un moyen et un grand véhicule : le plus léger suffit pour la plupart des trajets, le plus puissant se garde pour les tâches difficiles.</p></div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-leaf"></i>
+                    <h2>0.036 g CO2e</h2>
+                    <p>Estimation pour un échange Claude Sonnet <sup><a href="#source3">[3]</a></sup></p>
+<div class="ana"><p class="ana-text">C’est ce qu’émet une voiture en roulant environ 24&nbsp;cm, un peu moins que la longueur d’une feuille A4.</p></div>
+                </div>
+            </section>
+
+            <section class="impact-details">
+                <h2>Comparaison de l'empreinte carbone <sup><a href="#source3">[3]</a></sup><sup><a href="#source7">[7]</a></sup></h2>
+                <p>
+                    Une estimation issue de l'open dataset SAEF attribue environ <strong>0.036 g CO2e</strong>
+                    à un échange Claude Sonnet composé de 1 210 jetons, dans la région US East – N. Virginia.
+                    Cette valeur est calculée à partir de modèles de consommation, pas mesurée directement
+                    par Anthropic. Elle peut varier selon le modèle, la longueur de la demande, la taille
+                    de la réponse, le raisonnement demandé et la localisation du calcul.
+                    <sup><a href="#source3">[3]</a></sup>
+                </p>
+
+                <div class="chart-container" style="display: flex; justify-content: center; max-width: 100%; position: relative; height: 400px;">
+                    <canvas id="co2Chart"></canvas>
+                </div>
+<div class="ana"><p class="ana-text">Il faudrait environ 4&nbsp;200 échanges avec Claude Sonnet pour émettre autant de CO₂ qu’un trajet de 1&nbsp;km en voiture, et plus de 83&nbsp;000 pour égaler 100 g de bœuf.</p></div>
+            </section>
+
+            <section class="additional-impact">
+                <h2>Impacts supplémentaires <sup><a href="#source3">[3]</a></sup><sup><a href="#source4">[4]</a></sup><sup><a href="#source5">[5]</a></sup></h2>
+                <section class="additional-impact-content">
+                    <div class="impact-card impact-card-1">
+                        <p class="impact-value">0.036 g CO2e</p>
+                        <p class="impact-label">Estimation pour un échange Claude Sonnet <sup><a href="#source3">[3]</a></sup></p>
+<div class="ana"><p class="ana-text">Une conversation de 100&nbsp;échanges représente environ 3,6&nbsp;g de CO₂, soit à peu près la longueur d’une piscine de 25&nbsp;m parcourue en voiture.</p></div>
+                    </div>
+                    <div class="impact-card impact-card-2">
+                        <p class="impact-value">0.099 Wh</p>
+                        <p class="impact-label">Énergie estimée pour le même échange <sup><a href="#source3">[3]</a></sup></p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-battery" style="--level: 1%"><b>&lt; 1 %</b></div></div><p class="ana-text">Cela correspond à moins de 1 % de la batterie d’un smartphone de 4&nbsp;000&nbsp;mAh, ou à une ampoule LED de 10&nbsp;W allumée environ 36&nbsp;secondes.</p></div>
+                    </div>
+                    <div class="impact-card impact-card-3">
+                        <p class="impact-value">0.01-0.13 g</p>
+                        <p class="impact-label">Fourchette estimée entre les modèles Haiku et Opus <sup><a href="#source3">[3]</a></sup></p>
+<div class="ana"><div class="ana-viz" aria-hidden="true"><div class="ana-stack"><div class="ana-bar" style="--v: 7.7%"><span></span></div><small>Haiku, par rapport à Opus</small></div></div><p class="ana-text">L’écart est d’un facteur 13 : de 7&nbsp;cm à 87&nbsp;cm parcourus en voiture. Choisir le modèle le plus léger change donc vraiment l’empreinte.</p></div>
+                    </div>
+                </section>
+                <section class="additional-impact-content">
+                    <p>
+                        Le chiffre principal est une estimation et non une mesure officielle d'Anthropic.
+                        Il suppose une taille de modèle intermédiaire pour Claude Sonnet, 1 210 jetons
+                        par échange et une région de calcul correspondant à US East – N. Virginia.
+                        Il varie donc avec le modèle, la région et la longueur de la conversation.
+                        <sup><a href="#source3">[3]</a></sup>
+                    </p>
+                    <p>
+                        À l'échelle des infrastructures, les centres de données et les réseaux ont consommé
+                        environ 460 TWh d'électricité en 2022 selon l'AIE.
+                        Ces chiffres globaux ne permettent pas de déduire directement l'impact d'une réponse Claude.
+                        <sup><a href="#source5">[5]</a></sup>
+                    </p>
+                </section>
+            </section>
+
+            <section class="tips">
+                <h2>Conseils pour réduire l'empreinte carbone</h2>
+                <section class="additional-impact-content">
+                    <div class="tip-item">
+                        <p>Écrivez une demande complète et précise dès le départ pour éviter plusieurs allers-retours.</p>
+                    </div>
+                    <div class="tip-item">
+                        <p>Choisissez le modèle le plus léger adapté à la tâche, plutôt que le modèle le plus puissant par défaut.</p>
+                    </div>
+                    <div class="tip-item">
+                        <p>Réutilisez les documents utiles dans un projet plutôt que de recopier de longues informations dans chaque conversation.</p>
+                    </div>
+                    <div class="tip-item">
+                        <p>Évitez les sorties volumineuses ou les générations d'images sans besoin réel.</p>
+                    </div>
+                    <div class="tip-item">
+                        <p>Utilisez la recherche documentaire, les pièces jointes ou les outils uniquement lorsque cela apporte une information utile.</p>
+                    </div>
+                    <div class="tip-item">
+                        <p>Privilégiez une connexion Wi-Fi fiable et fermez les onglets ou applications inutiles si elles lancent des requêtes en arrière-plan.</p>
+                    </div>
+                </section>
+            </section>
+        </section>
+
+        <section class="bibliography">
+            <h2>Sources</h2>
+            <ul class="bibliography-list">
+                <li id="source1">
+                    [1] Anthropic, « Claude » : présentation officielle de l'assistant et de ses usages.
+                    Disponible en ligne :
+                    <a href="https://claude.com/product/overview" target="_blank" rel="noopener noreferrer">https://claude.com/product/overview</a>
+                </li>
+                <li id="source2">
+                    [2] Anthropic, « Claude 3 model family » : lancement de Haiku, Sonnet et Opus, disponibilité dans 159 pays.
+                    Disponible en ligne :
+                    <a href="https://www.anthropic.com/news/claude-3-family" target="_blank" rel="noopener noreferrer">https://www.anthropic.com/news/claude-3-family</a>
+                </li>
+                <li id="source3">
+                    [3] SOMA AI, « What is the carbon footprint of Claude, and how does it compare with ChatGPT? » :
+                    estimation de 0.036 g CO2e pour un échange Claude Sonnet de 1 210 jetons en US East – N. Virginia.
+                    <a href="https://somaai.earth/ai-footprint/answers/claude-carbon-footprint" target="_blank" rel="noopener noreferrer">https://somaai.earth/ai-footprint/answers/claude-carbon-footprint</a>
+                </li>
+                <li id="source4">
+                    [4] Li, Pengfei et al., « Making AI Less “Thirsty” : Uncovering and Addressing the Secret Water Footprint of AI Models »,
+                    Communications of the ACM / arXiv, 2023-2025.
+                    <a href="https://arxiv.org/abs/2304.03271" target="_blank" rel="noopener noreferrer">https://arxiv.org/abs/2304.03271</a>
+                </li>
+                <li id="source5">
+                    [5] International Energy Agency, « Data Centres and Data Transmission Networks » :
+                    énergie des centres de données, estimations à l'échelle mondiale.
+                    <a href="https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks" target="_blank" rel="noopener noreferrer">https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks</a>
+                </li>
+                <li id="source6">
+                    [6] Anthropic, « Transparency Hub » : informations publiques sur les pratiques de développement,
+                    les évaluations et les rapports de modèles.
+                    <a href="https://www.anthropic.com/transparency" target="_blank" rel="noopener noreferrer">https://www.anthropic.com/transparency</a>
+                </li>
+                <li id="source7">
+                    [7] ADEME, « Base Empreinte® » : facteurs d'émission utilisés pour la comparaison carbone des usages et produits.
+                    <a href="https://base-empreinte.ademe.fr/donnees/jeu-donnees" target="_blank" rel="noopener noreferrer">https://base-empreinte.ademe.fr/donnees/jeu-donnees</a>
+                </li>
+                <li>
+                    Les équivalences du quotidien sont des ordres de grandeur calculés à partir des chiffres de cette fiche.
+                    Hypothèses retenues : voiture à 150 g de CO₂ par km (ratio du graphique de cette fiche), batterie de smartphone
+                    de 4&nbsp;000&nbsp;mAh, ampoule LED de 10&nbsp;W, piscine de 25 m, feuille A4 de 29,7&nbsp;cm.
+                </li>
+            </ul>
+        </section>
+
+        <div class="button-container">
+            <button class="button" onclick="window.print()" title="Imprimez uniquement si nécessaire pour l'enseignement ou lorsque le numérique n'est pas adapté.">Imprimer cette fiche</button>
+            <button class="button-secondary" onclick="window.location.href='../quelques-chiffres.html'">Retour aux autres services</button>
+        </div>
+    </div>
+    <footer>
+        <p class="mg-0">&copy; 2026 - COURDIER Rémy & Étudiants d'informatique de l'Université de La Réunion - <a href="../a-propos.html">À propos</a></p>
+    </footer>
+
+    <img src="../../assets/img/Anthropic_logo.svg" class="bg-logo" alt="" style="top: 170px; left: 8%;">
+    <img src="../../assets/img/Anthropic_logo.svg" class="bg-logo" alt="" style="top: 80px; right: 8%;">
+    <img src="../../assets/img/Anthropic_logo.svg" class="bg-logo" alt="" style="bottom: 70px; right: 4%;">
+
+    <script>
+        var ctx = document.getElementById('co2Chart').getContext('2d');
+        var co2Chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Claude Sonnet (0.036 g)', '1 km en voiture (150 g)', '100 g de boeuf (3 kg)'],
+                datasets: [{
+                    label: 'g CO2 par action',
+                    data: [0.036, 150, 3000],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(255, 99, 132, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 3500
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ' : ' + tooltipItem.raw + ' g CO2e';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
