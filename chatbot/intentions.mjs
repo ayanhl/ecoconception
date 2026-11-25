@@ -119,7 +119,8 @@ export const INTENTIONS = [
             "quelles questions je peux poser", "que peux tu faire", "comment ça marche ce chat",
             "je ne sais pas quoi demander", "donne moi des idées de questions", "menu",
             "quels sujets connais tu", "sur quoi peux tu répondre", "tu connais quoi",
-            "par où commencer", "je découvre le site", "guide moi"
+            "par où commencer", "je découvre le site", "guide moi",
+            "tu réponds à quels genres de sujets", "quelles questions comprends tu"
         ],
         reponse: [
             "Je connais le contenu de ce site et je peux vous orienter vers la bonne page. Par exemple :",
@@ -630,8 +631,31 @@ export const INTENTIONS = [
             "Générer une image par IA demande en moyenne environ 2,9 Wh (2,907 kWh pour 1 000 images, Luccioni et al., 2024), et jusqu’à 11,5 Wh pour le modèle le moins efficace testé.",
             "C’est environ 60 fois plus que générer du texte. Le quiz n°3 estime l’énergie de vos propres habitudes et donne des conseils pour la réduire."
         ],
-        liens: [["Quiz : génération d’images par IA", "pages/quizIA.html"]],
-        suite: ["ia_bien_utiliser", "ia_impact"]
+        liens: [["Quiz : génération d’images par IA", "pages/quizIA.html"], ["Atelier : à quel coût ?", "pages/en-pratique/atelier-ia-images.html"]],
+        suite: ["atelier_ia_images", "ia_bien_utiliser", "ia_impact"]
+    },
+    {
+        id: "atelier_ia_images",
+        titre: "Atelier : images par IA",
+        modele: "page",
+        sujets: ["l'atelier génération d'images", "l'atelier images par ia", "l'atelier ia images", "les modèles de diffusion", "la diffusion", "le débruitage", "l'atelier à quel coût"],
+        exemples: [
+            "comment fonctionne un modèle de diffusion", "pourquoi la résolution change la consommation d'une image", "réduire le nombre d'étapes de génération",
+            "combien de wh pour générer une image en 1024", "rôle du gpu dans la génération d'images", "c'est quoi un modèle accéléré lcm",
+            "mesurer l'énergie d'une génération d'image", "512 ou 1024 pixels pour une image ia", "atelier interactif sur l'ia générative",
+            "pourquoi un gpu consomme autant", "du bruit à l'image", "comparer trois configurations de génération",
+            "comment une ia diffusion fabrique une image"
+        ],
+        reponse: [
+            "L’atelier « Générer une image par IA : à quel coût ? » (30 min, sans prérequis) explique comment un modèle de diffusion part d’un bruit aléatoire et le nettoie étape par étape, sur une carte graphique (GPU).",
+            "Il compare trois générations réellement mesurées sur un même GPU, avec la même demande :",
+            "• 1024 × 1024 px en 30 étapes : environ 0,78 Wh par image ;",
+            "• 512 × 512 px en 15 étapes : environ 0,078 Wh, 10 fois moins ;",
+            "• 512 × 512 px en 5 étapes avec un modèle accéléré : environ 0,030 Wh.",
+            "Moins de pixels et d’étapes, c’est souvent moins de détails : le but est la qualité suffisante pour le besoin, et ne générer que si c’est utile."
+        ],
+        liens: [["Atelier génération d’images", "pages/en-pratique/atelier-ia-images.html"]],
+        suite: ["ia_images", "ia_bien_utiliser", "ateliers"]
     },
     {
         id: "ia_bien_utiliser",
@@ -932,11 +956,12 @@ export const INTENTIONS = [
             "combien de temps durent les tp", "livrable des tp"
         ],
         reponse: [
-            "Le parcours commence par un QCM, puis quatre TP sur le site de l’association étudiante ESIROI : polices web (1h30), scripts inutilisés (2h), ressources web (2h30), SonarQube et ecoCode (3h).",
-            "Prérequis : HTML, CSS, JavaScript, Git, Docker et Docker Compose. Chaque TP alimente un rapport individuel de 10 pages maximum. Un atelier propose aussi de construire un chatbot éco-conçu."
+            "Le parcours commence par un QCM, puis quatre TP sur le site de l’association étudiante ESIROI : polices web (1h30), scripts inutilisés (2h), ressources web (2h30), SonarQube et ecoCode (3h). Prérequis : HTML, CSS, JavaScript, Git, Docker et Docker Compose ; chaque TP alimente un rapport individuel de 10 pages maximum.",
+            "Le TP 05 fait optimiser du code dans 7 langages, directement dans le navigateur.",
+            "Deux ateliers portent sur l’IA : construire un chatbot éco-conçu (2h) et comprendre le coût de la génération d’images (30 min)."
         ],
-        liens: [["Ateliers", "pages/en-pratique.html"], ["Atelier ChatBot éco-conçu", "pages/en-pratique/atelier-chatbot.html"]],
-        suite: ["qcm", "tp_polices", "ia_frugale"]
+        liens: [["Ateliers", "pages/en-pratique.html"], ["TP 05 : optimiser du code", "pages/en-pratique/tp05.html"], ["Atelier ChatBot éco-conçu", "pages/en-pratique/atelier-chatbot.html"], ["Atelier génération d’images", "pages/en-pratique/atelier-ia-images.html"]],
+        suite: ["qcm", "tp_polices", "tp_code", "atelier_ia_images"]
     },
     {
         id: "qcm",
@@ -1001,7 +1026,26 @@ export const INTENTIONS = [
             "Le TP 04 (3h) installe SonarQube avec Docker Compose, ajoute le plugin ecoCode, puis analyse le site du BDE avec SonarScanner pour repérer les pistes d’amélioration."
         ],
         liens: [["TP 04", "pages/en-pratique/tp04.html"], ["Outils", "pages/outils.html"]],
-        suite: ["langages", "outils"]
+        suite: ["tp_code", "langages", "outils"]
+    },
+    {
+        id: "tp_code",
+        titre: "TP 05 : optimiser du code",
+        modele: "notion",
+        sujets: ["l'optimisation du code", "le tp 5", "le tp05", "le tp optimiser du code", "l'algorithmique sobre", "le correcteur de code"],
+        exemples: [
+            "réécrire du code pour faire moins de calculs", "éviter de recopier un tableau", "somme des entiers de 1 à n sans boucle",
+            "compter les opérations de mon code", "exercices pour optimiser du code", "éviter un parcours inutile",
+            "obtenir le même résultat avec moins d'opérations", "exercice d'algorithmique et sobriété", "rendre un algorithme plus sobre",
+            "moins de copies en mémoire", "s'entraîner à optimiser un algorithme", "remplacer une boucle par un calcul direct"
+        ],
+        reponse: [
+            "Le TP 05 fait réécrire des extraits de code pour obtenir le même résultat avec moins de calculs ou moins de copies, dans l’un des 7 langages du site : JavaScript, Python, PHP, Rust, C, Java ou Dart.",
+            "Exercices : remplacer des additions répétées par un calcul direct, éviter un parcours inutile, lire une valeur sans recopier le tableau. Un correcteur, dans le navigateur, compte les opérations et les éléments copiés avant et après votre optimisation.",
+            "Prérequis : connaître les variables, opérateurs et tableaux d’un des langages."
+        ],
+        liens: [["TP 05", "pages/en-pratique/tp05.html"], ["Langages", "pages/langages.html"]],
+        suite: ["langages", "lang_python", "ateliers"]
     },
     {
         id: "quiz",
@@ -1018,7 +1062,7 @@ export const INTENTIONS = [
             "• n°2 « Quiz Green IT » : estimer l’impact de ses habitudes, avec des recommandations ;",
             "• n°3 « Génération d’images par IA » : estimer l’énergie de son usage."
         ],
-        liens: [["Choisir un quiz", "pages/quizz-access.html"]],
+        liens: [["Choisir un quiz", "pages/quizz-access.html"], ["Quiz 1 : surfeur responsable ?", "pages/quizV1.html"], ["Quiz 2 : Green IT", "pages/quizV2.html"], ["Quiz 3 : images par IA", "pages/quizIA.html"]],
         suite: ["qcm", "simulateur", "ia_images"]
     },
     {
