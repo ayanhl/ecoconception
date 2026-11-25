@@ -2132,8 +2132,33 @@ sup a {
     width: 100%;
 }
 
-.collapsible.is-open h2 {
+.collapsible.is-open h2,
+details.collapsible[open] > summary h2 {
     color: var(--highlight-color);
+}
+
+/* Sections repliables natives des ateliers */
+details.collapsible > summary {
+    display: block;
+    list-style: none;
+    cursor: pointer;
+}
+
+details.collapsible > summary::-webkit-details-marker {
+    display: none;
+}
+
+details.collapsible[open] > .content {
+    display: block;
+    text-align: left;
+}
+
+details.collapsible > summary .toggle-icon::before {
+    content: '+';
+}
+
+details.collapsible[open] > summary .toggle-icon::before {
+    content: '−';
 }
 
 .practical-section h2 {
@@ -2175,6 +2200,132 @@ pre {
 pre code {
     display: block;
     line-height: 1.4em;
+}
+
+/* TP 05 — Éditeur et comparaison des résultats */
+.tp05 {
+    margin-inline: auto;
+}
+
+.tp05-page {
+    padding-bottom: 0;
+}
+
+.tp05-page footer {
+    position: relative;
+    height: auto;
+    padding: .75rem 1rem;
+}
+
+.tp05-page footer > p {
+    margin: 0;
+    text-align: center;
+}
+
+.tp05 [hidden],
+.tp05-feedback:empty {
+    display: none;
+}
+
+.tp05 .collapsible {
+    margin-bottom: 1.15rem;
+}
+
+.tp05 fieldset {
+    min-width: 0;
+    border: 0;
+}
+
+.tp05-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: .75rem 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.tp05-filters > div {
+    flex: 1 1 12rem;
+    min-width: 0;
+}
+
+.tp05 label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: .25rem;
+}
+
+.tp05 select,
+.tp05 textarea {
+    width: 100%;
+    color: var(--text-color);
+    background: var(--background-color);
+    color-scheme: dark;
+    border: 1px solid var(--text-color-light);
+    border-radius: 5px;
+    padding: .65rem .75rem;
+    font: inherit;
+}
+
+.tp05 textarea {
+    resize: vertical;
+    font-family: ui-monospace, monospace;
+}
+
+.tp05 :is(summary, select, textarea, pre):focus-visible {
+    outline: 2px solid var(--highlight-color);
+    outline-offset: 3px;
+}
+
+.tp05-brief h3 {
+    margin-bottom: .5rem;
+}
+
+.tp05-workspace {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.tp05-workspace pre {
+    margin: .5rem 0 .75rem;
+    background: var(--background-color);
+}
+
+.tp05-workspace pre code {
+    padding: 0;
+    background: transparent;
+}
+
+.tp05-workspace summary {
+    cursor: pointer;
+    color: var(--highlight-color);
+    font-weight: bold;
+}
+
+.tp05-workspace .button {
+    min-height: 44px;
+    margin: .85rem 0 0;
+}
+
+.tp05-feedback:not([data-success="true"]) {
+    border-color: var(--warning-color);
+}
+
+.tp05-results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: .75rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.tp05-results :is(th, td) {
+    border-bottom: 1px solid var(--text-color-light);
+    padding: .45rem;
+}
+
+.tp05-results :is(td, th:not(:first-child)) {
+    text-align: right;
 }
 
 /* --- Module "Personnaliser selon votre usage" --- */
@@ -2846,6 +2997,10 @@ pre code {
         display: none;
     }
 
+    .tp05-workspace {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
     /* Langages */
     .language-ranking,
     .language-why-grid {
@@ -2855,6 +3010,10 @@ pre code {
 
 /* Smartphones (Portrait) */
 @media screen and (max-width: 600px) {
+    .tp05-filters > div {
+        flex-basis: 100%;
+    }
+
     /* Structure globale */
     body {
         align-items: stretch;
@@ -3648,6 +3807,106 @@ pre code {
 
 @media print {
     .eco-badge {
+        display: none;
+    }
+}
+
+/* CHATBOT */
+
+/* Bouton d'ouverture (le reste du chatbot est dans chatbot-eco.css, chargé au premier clic) */
+.chatbot-lanceur {
+    position: fixed;
+    right: 16px;
+    bottom: var(--chatbot-bas, 76px);
+    z-index: 9;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px 0 14px;
+    border: 1px solid var(--highlight-color);
+    border-radius: 22px;
+    background-color: var(--background-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    color: var(--highlight-color);
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.chatbot-lanceur svg {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linejoin: round;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .chatbot-lanceur:hover {
+        background-color: var(--highlight-color);
+        color: var(--background-color);
+    }
+}
+
+.chatbot-lanceur:active {
+    transform: scale(0.97);
+}
+
+.chatbot-lanceur:focus-visible {
+    outline: 2px solid var(--highlight-color);
+    outline-offset: 3px;
+}
+
+.chatbot-lanceur[aria-busy] {
+    opacity: 0.7;
+    cursor: progress;
+}
+
+.chatbot-lanceur[hidden] {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .chatbot-lanceur {
+        right: 12px;
+    }
+}
+
+/* Petit écran : seulement l'icône, le texte reste lu par les lecteurs d'écran */
+@media screen and (max-width: 600px) {
+    .chatbot-lanceur {
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+    }
+
+    .chatbot-lanceur span {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .chatbot-lanceur {
+        transition: none;
+    }
+
+    .chatbot-lanceur:active {
+        transform: none;
+    }
+}
+
+@media print {
+    .chatbot-lanceur {
         display: none;
     }
 }

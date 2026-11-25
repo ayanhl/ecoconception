@@ -156,6 +156,7 @@ const questions = [
     },
     {
         id: "streaming_week",
+        glossary: "impact_environnemental",
         question: "Combien d’heures de vidéo en streaming regardez-vous en moyenne par semaine ?",
         source: {
             label: "ADEME — Modérer le streaming vidéo",
@@ -300,6 +301,7 @@ const questions = [
     },
     {
         id: "habits",
+        glossary: "empreinte_carbone",
         question: "À quelle fréquence appliquez-vous des gestes pour réduire l’impact de vos usages numériques ?",
         source: {
             label: "ADEME — Modérer le streaming vidéo",
@@ -331,6 +333,7 @@ const questions = [
     },
     {
         id: "equipment_purchases",
+        glossary: "impact_environnemental",
         question: "Combien d’équipements électroniques neufs achetez-vous par an ?",
         source: {
             label: "ADEME — Vérifier l’étiquette avant d’acheter",

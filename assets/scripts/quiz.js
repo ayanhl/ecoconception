@@ -8,6 +8,7 @@
     const title = get('#question-title');
     const options = get('[data-options]');
     const feedback = get('[data-feedback]');
+    const glossary = get('[data-glossary]');
     const answerMessage = get('[data-answer-message]');
     const previous = get('[data-previous]');
     const validate = get('[data-validate]');
@@ -44,6 +45,13 @@
         source.textContent = question.source.label;
         source.href = question.source.url;
         get('[data-source-date]').textContent = ` — consulté le ${question.source.consultedAt}`;
+
+        glossary.hidden = !question.glossary;
+        if (question.glossary) {
+            const link = glossary.querySelector('a');
+            link.href = `./terminologie.html#${question.glossary}`;
+            link.textContent = question.glossary.replaceAll('_', ' ');
+        }
     }
 
     function showView(view) {

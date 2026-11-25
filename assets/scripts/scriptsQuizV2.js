@@ -171,6 +171,7 @@ const questions = [
     },
     {
         id: "updates",
+        glossary: "impact_environnemental",
         question: "Quand installez-vous les mises à jour de sécurité ?",
         icon: "🔄",
         source: {

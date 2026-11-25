@@ -45,6 +45,9 @@
         visible('[data-start]', version === 2, 'chargement initial');
         if (version === 2) click('[data-start]');
 
+        const glossaryByQuestion = version === 1
+            ? { 5: 'impact_environnemental', 9: 'empreinte_carbone', 10: 'impact_environnemental' }
+            : { 5: 'impact_environnemental' };
         for (let index = 0; index < questionCount; index++) {
             const stage = `question ${index + 1}`;
             views(stage, false, true, false);
@@ -62,6 +65,11 @@
 
             views(`${stage} validée`, false, true, false);
             visible('[data-feedback]', true, stage);
+            const term = glossaryByQuestion[index];
+            visible('[data-glossary]', Boolean(term), stage);
+            if (term && get('[data-glossary] a').getAttribute('href') !== `./terminologie.html#${term}`) {
+                throw new Error(`Quiz ${version}, ${stage} : lien vers le glossaire incorrect.`);
+            }
             visible('[data-validate]', false, stage);
             visible('[data-next]', true, stage);
             if (get('[data-feedback] details')) {
