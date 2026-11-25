@@ -589,7 +589,8 @@
                 modele.pages = t.pages;
                 modele.passages = t.passages;
             }, function () {
-                modele.passages = [];
+                // Hors ligne : on répond sans les phrases du site, et on réessaiera à la prochaine question
+                textes = null;
             });
         }
         return textes;
@@ -698,9 +699,22 @@
         lanceur.focus();
     }
 
+    // Échec du téléchargement : un bouton relance le chargement sans recharger la page
     function erreur() {
         var m = message('bot', 'Assistant');
         texte(m, ['Le chatbot n’a pas pu se charger. Vérifiez votre connexion, puis réessayez.']);
+        var bloc = el('div', 'chatbot__suggestions'), ul = el('ul'), li = el('li');
+        var b = el('button', 'chatbot__puce', 'Réessayer');
+        b.type = 'button';
+        b.addEventListener('click', function () {
+            fil.removeChild(m);
+            demarrer();
+            champ.focus();
+        });
+        li.appendChild(b);
+        ul.appendChild(li);
+        bloc.appendChild(ul);
+        m.appendChild(bloc);
         afficher(m);
     }
 
@@ -748,23 +762,28 @@
         });
     }
 
+    // Télécharge le modèle et les réponses, puis reprend la conversation en cours
+    function demarrer() {
+        var donnees = fetch(lien('assets/data/chatbot-eco.json')).then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            return r.json();
+        });
+        return Promise.all([donnees, cssPret()]).then(function (res) {
+            modele = res[0];
+            intentions = modele.intentions;
+            restaurer();
+        }, erreur);
+    }
+
     construire();
 
-    var donnees = fetch(lien('assets/data/chatbot-eco.json')).then(function (r) {
-        if (!r.ok) throw new Error(r.status);
-        return r.json();
-    });
-
     // Le chatbot ne s'ouvre pas tout seul : hamburger.js l'ouvre au clic sur le bouton
-    Promise.all([donnees, cssPret()]).then(function (res) {
-        modele = res[0];
-        intentions = modele.intentions;
-        restaurer();
-    }, erreur).then(function () {
+    demarrer().then(function () {
         window.chatbotEco = {
             basculer: function () { if (panneau.hidden) ouvrirPanneau(); else fermerPanneau(); },
             analyser: function (question) { return modele ? analyser(question) : Promise.reject(); },
-            stats: modele ? modele.stats : null
+            // Lu à chaque fois : le modèle peut arriver plus tard, après « Réessayer »
+            get stats() { return modele ? modele.stats : null; }
         };
         document.dispatchEvent(new Event('chatbot-pret'));
     });
