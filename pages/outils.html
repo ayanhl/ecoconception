@@ -525,7 +525,7 @@
 
     <div class="main">
         <!-- TITRE -->
-        <h1>Outils pour l’Écoconception Numérique</h1>
+        <h1>Outils pour l’<a href="terminologie.html#ecoconception">Écoconception</a> Numérique</h1>
 
         <!-- INTRODUCTION -->
         <section class="intro-card">
@@ -715,7 +715,7 @@
             <article class="intro-card">
                 <h2>Un outil manquant ?</h2>
                 <p>
-                    Vous connaissez un outil utile pour l’écoconception numérique ?
+                    Vous connaissez un outil utile pour l’<a href="terminologie.html#ecoconception">écoconception</a> numérique ?
                     Nous aimerions le découvrir.
                 </p>
                 <a href="mailto:remy.courdier@univ-reunion.fr" class="button">
@@ -742,7 +742,7 @@
 
             websitecarbon: {
                 name: "Website Carbon",
-                description: "Estime l’empreinte carbone d’une page web et donne une estimation simple des émissions générées lors de son affichage.",
+                description: "Estime l’<a href='./terminologie.html#empreinte_carbone'>empreinte carbone</a> d’une page web et donne une estimation simple des émissions générées lors de son affichage.",
                 tags: ["Diagnostic rapide", "Impact carbone"],
                 licence: "Gratuit",
                 ideal: "Évaluer rapidement l’impact d’une page vitrine ou d’un site public.",
@@ -790,7 +790,7 @@
                 description: "Mesure la consommation énergétique d’un scénario utilisateur côté client et serveur, avec une approche adaptée aux applications web.",
                 tags: ["Impact carbone", "Code & CI/CD"],
                 licence: "Freemium / Pro",
-                ideal: "Tester l’impact environnemental d’applications plus complexes.",
+                ideal: "Tester l’<a href='./terminologie.html#impact_environnemental'>impact environnemental</a> d’applications plus complexes.",
                 link: "https://greenframe.io/"
             },
 
@@ -823,7 +823,7 @@
 
             fresque: {
                 name: "Fresque du Numérique",
-                description: "Atelier collaboratif permettant de comprendre les impacts environnementaux du numérique et de sensibiliser un groupe.",
+                description: "Atelier collaboratif permettant de comprendre les <a href='./terminologie.html#impact_environnemental'>impacts environnementaux</a> du numérique et de sensibiliser un groupe.",
                 tags: ["Sensibilisation"],
                 licence: "Atelier animé",
                 ideal: "Former une équipe ou sensibiliser un public aux enjeux du numérique responsable.",
@@ -856,7 +856,7 @@
             const tool = toolsData[toolKey];
 
             detailName.textContent = tool.name;
-            detailDescription.textContent = tool.description;
+            detailDescription.innerHTML = tool.description;
 
             detailTags.innerHTML = "";
 

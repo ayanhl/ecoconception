@@ -31,7 +31,7 @@
     const ECHELLE = [
         ['Boutons et règles fixes', 'Non, seulement les choix proposés', 'Quelques Ko', 'Non'],
         ['Recherche par mots-clés', 'En partie : les mots exacts', 'Un index de quelques Ko', 'Non'],
-        ['Petit classifieur (ce chatbot)', 'Oui, sur 73 sujets', '22 Ko, moins d’1 ms par question', 'Non : les réponses sont rédigées'],
+        ['Petit classifieur (ce chatbot)', 'Oui, sur 75 sujets', '23 Ko, moins d’1 ms par question', 'Non : les réponses sont rédigées'],
         ['Recherche sémantique', 'Oui, synonymes compris', 'Un modèle de plusieurs dizaines de Mo', 'Non, si les réponses sont rédigées'],
         ['Petit LLM dans le navigateur', 'Oui', 'Des centaines de Mo à quelques Go, un appareil puissant', 'Oui'],
         ['Grand LLM sur serveur', 'Oui', 'Des serveurs à cartes graphiques : 0,24 Wh par requête (Gemini), 1,14 g CO₂e et 45 mL d’eau par réponse (Mistral)', 'Oui']
@@ -81,7 +81,7 @@
 
         const analyser = (question) => {
             if (!question || !window.chargerChatbot) return;
-            resultat.textContent = window.chatbotEco ? 'Analyse…' : 'Téléchargement du chatbot (environ 34 Ko compressés)…';
+            resultat.textContent = window.chatbotEco ? 'Analyse…' : 'Téléchargement du chatbot (environ 35 Ko compressés)…';
             window.chargerChatbot()
                 .then(() => window.chatbotEco.analyser(question))
                 .then(montrer, () => { resultat.textContent = 'Le chatbot n’a pas pu se charger. Vérifiez votre connexion.'; });

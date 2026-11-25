@@ -62,7 +62,7 @@
                 options: [
                     { value: 1, label: "Dès qu'une mise à jour est disponible", impact: 5 , info: "Des mises à jour fréquentes consomment de la bande passante et de l'énergie.", recommendation: "Évitez les mises à jour non essentielles si possible." },
                     { value: 2, label: "Une fois par mois", impact: 3 , info: "Des mises à jour régulières mais modérées réduisent l'impact.", recommendation: "Conservez cette bonne habitude." },
-                    { value: 3, label: "Moins souvent", impact: 2 , info: "Moins de mises à jour peuvent réduire votre impact mais poser des problèmes de sécurité.", recommendation: "Équilibrez entre sécurité et impact environnemental." }
+                    { value: 3, label: "Moins souvent", impact: 2 , info: "Moins de mises à jour peuvent réduire votre impact mais poser des problèmes de sécurité.", recommendation: "Équilibrez entre sécurité et <a href='./terminologie.html#impact_environnemental'>impact environnemental</a>." }
                 ]
             },
             {
@@ -309,7 +309,7 @@
 
             // Affiche les informations associées à l'option sélectionnée
             document.querySelector('.info-text').textContent = `Impact : ${selectedOption.impact} kg CO2`;
-            document.querySelector('.recommendation-text').textContent = `Recommandation : ${selectedOption.recommendation}`;
+            document.querySelector('.recommendation-text').innerHTML = `Recommandation : ${selectedOption.recommendation}`;
             document.querySelector('.info-box').classList.add('visible');
 
             // Met à jour l'affichage des boutons
@@ -358,7 +358,7 @@
                 const question = questions.find(q => q.id === questionId);
                 const option = question.options.find(opt => opt.value === answerValue);
                 const li = document.createElement('li');
-                li.textContent = option.recommendation;
+                li.innerHTML = option.recommendation;
                 recommendationsList.appendChild(li);
             });
         }

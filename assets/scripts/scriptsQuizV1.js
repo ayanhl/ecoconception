@@ -70,7 +70,7 @@ const questions = [
             { text: "Plus de 20 heures", co2Impact: 0 }
         ],
         info: "Netflix, 160 millions d’abonnés payant dans le monde sur 220 millions ont visionné au moins une création Netflix évoquant le climat en 2020.",
-        extra: "Regarder une heure de vidéo de streaming en Métropole ou à La Réunion n’a pas le même impact environnemental.",
+        extra: "Regarder une heure de vidéo de streaming en Métropole ou à La Réunion n’a pas le même <a href='./terminologie.html#impact_environnemental'>impact environnemental</a>.",
         source: "[6] 'Le vrai coût écologique du streaming vidéo,' Les Numériques, 2023. [Online]. Available: <a href='https://www.lesnumeriques.com/vie-du-net/le-vrai-cout-ecologique-du-streaming-video-a197241.html' target='_blank'>https://www.lesnumeriques.com/vie-du-net/le-vrai-cout-ecologique-du-streaming-video-a197241.html</a>"
     },
     {
@@ -110,14 +110,14 @@ const questions = [
         source: "[9] 'Objets connectés: 50 milliards d'émetteurs de CO2,' Télécom SudParis, 2023. [Online]. Available: <a href='https://www.telecom-sudparis.eu/actualite/objets-connectes-50-milliards-demetteurs-de-co2/' target='_blank'>https://www.telecom-sudparis.eu/actualite/objets-connectes-50-milliards-demetteurs-de-co2/</a>"
     },
     {
-        question: "Avez-vous des pratiques pour réduire votre empreinte carbone numérique (réduction des emails inutiles, baisse de la qualité de streaming, etc.) ?",
+        question: "Avez-vous des pratiques pour réduire votre <a href='./terminologie.html#empreinte_carbone'>empreinte carbone</a> numérique (réduction des emails inutiles, baisse de la qualité de streaming, etc.) ?",
         answers: [
             { text: "Oui, régulièrement", co2Impact: -0.1 },
             { text: "Oui, parfois", co2Impact: -0.05 },
             { text: "Non, mais j'y pense", co2Impact: 0 },
             { text: "Non, jamais ", co2Impact: 0.1 }
         ],
-        info: "Réduire la qualité de streaming ou limiter les emails inutiles sont des pratiques efficaces pour diminuer son empreinte carbone.",
+        info: "Réduire la qualité de streaming ou limiter les emails inutiles sont des pratiques efficaces pour diminuer son <a href='./terminologie.html#empreinte_carbone'>empreinte carbone</a>.",
         extra: "Éteindre sa webcam pendant sa visioconférence, c'est bon pour la planète. Passer votre vidéo de 4K à HD permet de réduire votre consommation énergétique.",
         source: "[10] 'Éteindre sa webcam pendant sa visioconférence, c'est bon pour la planète,' Huffington Post, 2023. [Online]. Available: <a href='https://www.huffingtonpost.fr/vie-de-bureau/video/eteindre-sa-webcam-pendant-sa-visioconference-c-est-bon-pour-la-planete_176254.html' target='_blank'>https://www.huffingtonpost.fr/vie-de-bureau/video/eteindre-sa-webcam-pendant-sa-visioconference-c-est-bon-pour-la-planete_176254.html</a><br>[11] 'Energy consumption of video streaming' Université de Linköping, 2024. [Online]. Available: <a href='https://www.diva-portal.org/smash/get/diva2%3A1861519/FULLTEXT01.pdf' target='_blank'>https://www.diva-portal.org/smash/get/diva2%3A1861519/FULLTEXT01.pdf</a>"
     },
@@ -131,7 +131,7 @@ const questions = [
         ],
         info: "La fabrication de matériel informatique représente 97% de l’épuisement de nos ressources !",
         extra: "La fabrication de nouveau matériel informatique représente également : 29% de la consommation énergétique dans le monde, 54% des émissions de GES, et 61% de notre utilisation en eau.",
-        source: "[12] 'L'impact environnemental des équipements électroniques,' CNRS, 2023. [Online]. Available: <a href='https://csi.math.cnrs.fr/documents/info.pdf' target='_blank'>https://csi.math.cnrs.fr/documents/info.pdf</a>"
+        source: "[12] 'L'<a href='./terminologie.html#impact_environnemental'>impact environnemental</a> des équipements électroniques,' CNRS, 2023. [Online]. Available: <a href='https://csi.math.cnrs.fr/documents/info.pdf' target='_blank'>https://csi.math.cnrs.fr/documents/info.pdf</a>"
     }
 ];
 
