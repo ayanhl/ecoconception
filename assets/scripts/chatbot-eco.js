@@ -141,16 +141,36 @@
 
     var CHIFFRES = { un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10 };
 
-    // Quantité demandée : « 2 heures », « 1h30 », « 30 minutes », « 10 questions »
+    var NOMBRE = '(\\d+|une?|deux|trois|quatre|cinq|six|sept|huit|neuf|dix)';
+
+    // Quantité demandée : « 2 heures », « 1h30 », « 1 h 30 », « une heure et demie »,
+    // « une demi-heure », « un quart d'heure », « 30 minutes », « 10 questions »
     function quantite(t) {
-        var m = t.match(/\b(\d+)h(\d{2})\b/);
+        var m = t.match(/\b(\d+) ?h ?(\d{2})\b/);
         if (m) return { unite: 'heure', n: +m[1] + m[2] / 60 };
-        m = t.match(/\b(\d+|une?|deux|trois|quatre|cinq|six|sept|huit|neuf|dix) ?(h|heures?|min|minutes?|questions?|requetes?|recherches?|prompts?|messages?|echanges?)\b/);
+        m = t.match(new RegExp('\\b' + NOMBRE + ' ?(?:h|heures?) et (demie?|quart)\\b'));
+        if (m) return { unite: 'heure', n: (CHIFFRES[m[1]] || +m[1]) + (m[2] === 'quart' ? 0.25 : 0.5) };
+        if (/\bdemi ?heures?\b/.test(t)) return { unite: 'heure', n: 0.5 };
+        if (/\bquarts? d ?heures?\b/.test(t)) return { unite: 'heure', n: 0.25 };
+        m = t.match(new RegExp('\\b' + NOMBRE + ' ?(h|heures?|min|minutes?|questions?|requetes?|recherches?|prompts?|messages?|echanges?)\\b'));
         if (!m) return null;
         var n = CHIFFRES[m[1]] || +m[1];
         if (/^h/.test(m[2])) return { unite: 'heure', n: n };
         if (/^min/.test(m[2])) return { unite: 'heure', n: n / 60 };
         return { unite: 'question', n: n };
+    }
+
+    // Fréquence demandée : « par jour », « chaque semaine », « tous les mois »…
+    function periode(t) {
+        if (/\bjour(s|nees?)?\b|\bquotidien/.test(t)) return { mot: 'jour', fois: 365 };
+        if (/\bsemaines?\b|\bhebdo/.test(t)) return { mot: 'semaine', fois: 52 };
+        if (/\bmois\b|\bmensuel/.test(t)) return { mot: 'mois', fois: 12 };
+        return null;
+    }
+
+    // 55 g → « 55 g » ; 15 060 g → « 15,1 kg »
+    function masse(g) {
+        return g >= 1000 ? nombre(g / 1000) + ' kg' : nombre(g) + ' g';
     }
 
     // 0,5 → « 30 minutes » ; 2,5 → « 2 h 30 » ; 2 → « 2 heures »
@@ -186,20 +206,26 @@
         var note = 'Ordres de grandeur tirés des fiches du site, dont les sources diffèrent.';
 
         if (services.length === 1) {
-            var f = services[0], q = quantite(t);
-            // « une heure de Netflix » : la réponse complète du sujet est plus utile qu'un calcul
-            if (!q || q.unite !== f.unite || q.n === 1) return null;
+            var f = services[0], q = quantite(t), frequence = periode(t);
+            // « une heure de Netflix » : la réponse complète du sujet est plus utile qu'un calcul,
+            // sauf si une fréquence est demandée (« une heure de Netflix par jour »)
+            if (!q || q.unite !== f.unite || (q.n === 1 && !frequence)) return null;
             var g = q.n * f.co2;
             if (f.unite === 'heure') {
-                lignes.push(duree(q.n) + ' sur ' + f.nom + (q.n === 1 ? ' émet' : ' émettent') + ' environ ' + nombre(g) + ' g de CO₂ (' +
+                // « 1 heure » et « 1 h 30 » au singulier, « 30 minutes » et « 2 heures » au pluriel
+                var pluriel = q.n >= 2 || q.n < 1;
+                lignes.push(duree(q.n) + ' sur ' + f.nom + (pluriel ? ' émettent' : ' émet') + ' environ ' + nombre(g) + ' g de CO₂ (' +
                     nombre(f.co2) + ' g par heure), autant qu’environ ' + voiture(g) + ' en voiture.');
                 if (f.eau) lignes.push('Cela représente aussi environ ' + nombre(q.n * f.eau) + ' litres d’eau.');
             } else {
-                lignes.push(nombre(q.n) + ' ' + f.quoi + (q.n === 1 ? ' émet' : ' émettent') + ' environ ' + nombre(g) + ' g de CO₂ (' +
+                // « 1 question à ChatGPT émet », « 10 questions à ChatGPT émettent »
+                var quoi = q.n === 1 ? f.quoi.replace(/^(\S+)s\b/, '$1') : f.quoi;
+                lignes.push(nombre(q.n) + ' ' + quoi + (q.n === 1 ? ' émet' : ' émettent') + ' environ ' + nombre(g) + ' g de CO₂ (' +
                     nombre(f.co2) + ' g par ' + f.par + '), autant qu’environ ' + voiture(g) + ' en voiture.');
             }
-            if (/\bjour|quotidien/.test(t)) {
-                lignes.push('Chaque jour pendant un an : environ ' + nombre(g * 365 / 1000) + ' kg de CO₂.');
+            if (frequence) {
+                var an = g * frequence.fois;
+                lignes.push('Chaque ' + frequence.mot + ' pendant un an : environ ' + masse(an) + ' de CO₂, autant qu’environ ' + voiture(an) + ' en voiture.');
             }
             lignes.push(note);
             return { reponse: lignes, liens: liens, suite: ['equivalences', 'services_comparaison'] };

@@ -136,6 +136,13 @@ export const TESTS = [
     ["10 questions à chatgpt c'est combien", "calcul"],
     ["facebook ou twitter, lequel utilise le plus d'eau", "calcul"],
     ["une heure de netflix équivaut à combien de questions chatgpt", "calcul"],
+    ["1 h 30 de youtube ça fait combien", "calcul"],
+    ["une demi-heure de tiktok", "calcul"],
+    ["une heure et demie de netflix", "calcul"],
+    ["un quart d'heure d'instagram par jour", "calcul"],
+    ["1h de tiktok par jour", "calcul"],
+    ["2 heures de youtube par semaine", "calcul"],
+    ["une question à chatgpt par jour", "calcul"],
 
     ["quelle est la météo à saint-denis", "hors_sujet"],
     ["donne-moi la recette du rougail saucisse", "hors_sujet"],
