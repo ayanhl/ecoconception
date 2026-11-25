@@ -33,7 +33,8 @@
     }
 }
 
-.chatbot[hidden] {
+.chatbot[hidden],
+.chatbot [hidden] {
     display: none;
 }
 
@@ -223,6 +224,24 @@
 
 .chatbot__pourquoi p {
     margin-top: 4px;
+}
+
+/* Invitation au premier accès */
+.chatbot__invitation {
+    flex: 1;
+    padding: 16px;
+    overflow: auto;
+}
+
+.chatbot__invitation-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.chatbot__invitation-actions a.button:not(:hover) {
+    color: var(--background-color);
 }
 
 /* Formulaire */

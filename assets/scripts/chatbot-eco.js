@@ -337,7 +337,9 @@
 
     var racineSite = new URL('../../', script.src).href;
     var CLE = 'chatbot-eco';
-    var modele = null, panneau, fil, champ, intentions;
+    var CLE_INVITATION = 'chatbot-eco-invitation';
+    var PAGE_ATELIER = 'pages/en-pratique/atelier-chatbot.html';
+    var modele = null, panneau, invitation, decouvrir, fil, champ, intentions;
 
     function lien(url) { return new URL(url, racineSite).href; }
 
@@ -378,6 +380,10 @@
         try { sessionStorage.removeItem(CLE); } catch (e) { /* rien à faire */ }
     }
 
+    function invitationVue() {
+        try { return localStorage.getItem(CLE_INVITATION) !== null; } catch (e) { return false; }
+    }
+
     function construire() {
         panneau = el('section', 'chatbot');
         panneau.id = 'chatbot';
@@ -404,7 +410,7 @@
             oublier();
             fil.textContent = '';
             accueillir();
-            champ.focus();
+            (invitation.hidden ? champ : decouvrir).focus();
         });
 
         var fermer = el('button', 'chatbot__icone');
@@ -449,12 +455,49 @@
             questionner(question);
         });
 
+        invitation = el('section', 'chatbot__invitation');
+        invitation.setAttribute('aria-labelledby', 'chatbot-invitation-texte');
+        var texteInvitation = el('p', '', 'Découvrez comment ce chatbot a été conçu pour limiter les ressources utilisées.');
+        texteInvitation.id = 'chatbot-invitation-texte';
+        invitation.appendChild(texteInvitation);
+
+        var actions = el('div', 'chatbot__invitation-actions');
+        decouvrir = el('a', 'button', 'Découvrir l’atelier');
+        decouvrir.href = lien(PAGE_ATELIER);
+        decouvrir.setAttribute('aria-describedby', texteInvitation.id);
+        var acceder = el('button', 'button-secondary', 'Accéder au chatbot');
+        acceder.type = 'button';
+        acceder.setAttribute('aria-describedby', texteInvitation.id);
+        actions.append(decouvrir, acceder);
+        invitation.appendChild(actions);
+
+        function afficherConversation() {
+            invitation.hidden = true;
+            fil.hidden = false;
+            formulaire.hidden = false;
+        }
+
+        function choisirParcours(choix) {
+            try { localStorage.setItem(CLE_INVITATION, choix); } catch (e) { /* Le panneau reste utilisable. */ }
+            afficherConversation();
+            champ.focus();
+        }
+
+        decouvrir.addEventListener('click', function () { choisirParcours('atelier'); });
+        acceder.addEventListener('click', function () { choisirParcours('chatbot'); });
+        if (invitationVue()) afficherConversation();
+        else {
+            fil.hidden = true;
+            formulaire.hidden = true;
+        }
+
         var note = el('p', 'chatbot__note', 'Réponses rédigées à partir du site, aucune donnée envoyée. ');
         var comment = el('a', '', 'Comment ça marche ?');
-        comment.href = lien('pages/en-pratique/atelier-chatbot.html');
+        comment.href = lien(PAGE_ATELIER);
         note.appendChild(comment);
 
         panneau.appendChild(entete);
+        panneau.appendChild(invitation);
         panneau.appendChild(fil);
         panneau.appendChild(formulaire);
         panneau.appendChild(note);
@@ -689,7 +732,7 @@
         // Conversation reprise d'une autre page : afficher le dernier message
         var dernier = fil.lastElementChild;
         if (dernier) fil.scrollTop = dernier.offsetTop - fil.offsetTop - 8;
-        champ.focus();
+        (invitation.hidden ? champ : decouvrir).focus();
     }
 
     function fermerPanneau() {
